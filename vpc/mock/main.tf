@@ -22,5 +22,5 @@ resource "random_id" "vpc" {
 }
 
 output "vpc_id" {
-    value = "vpc-${random_id.frontend.result}"
+    value = "vpc-${random_id.vpc.result}"
 }
