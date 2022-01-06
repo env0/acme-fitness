@@ -7,7 +7,7 @@ deploy:
 curl --request POST \
   --url https://api.env0.com/configuration \
   --user $ENV0_API_KEY:$ENV0_API_SECRET \
-  --header 'Content-Type: application/json' \
+  --header "Content-Type: application/json" \
   --data "[
   {
     \"name\": \"vpc_id\",
