@@ -14,15 +14,13 @@ variable "refresh_date" {
   type = string
   default = "00/00/0000"
 }
-resource "random_string" "backend" {
+resource "random_id" "vpc" {
   keepers = {
       refresh_date = var.refresh_date
   }
-  length           = 5
-  upper            = true
-  special          = false
+  byte_length = 8
 }
 
-output "backend_name" {
-    value = "backend-${random_string.backend.result}"
+output "vpc_id" {
+    value = "vpc-${random_id.frontend.result}"
 }

@@ -23,6 +23,6 @@ resource "random_string" "frontend" {
   special          = false
 }
 
-output "random_string" {
-    value = random_string.frontend.result
+output "frontend_name" {
+    value = "frontend-${random_string.backend.result}"
 }
