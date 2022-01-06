@@ -3,7 +3,7 @@
 ## What?
 
 ### acme-fitness
-Acme-Fitness is a public repo to help users quickly try out env0 with a collection of env0 templates and examples
+acme-fitness is a public repo to help users quickly try out env0 with a collection of env0 templates and examples
 It is a pretend company with its own set of services and infrastructure as code (IaC) files to manage and be deployed.
 
 Here's a simple architectural diagram:
