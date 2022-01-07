@@ -13,7 +13,7 @@ curl --request POST \
   \"isRequired\": true,
   \"scopeId\": \"$ENV0_PROJECT_ID\",
   \"scope\": \"PROJECT\",
-  \"type\": 0,
+  \"type\": 1,
   \"organizationId\": \"$ENV0_ORGANIZATION_ID\",
   \"description\": \"value updated from vpc (mock) environment env0.yml\",
   \"isSensitive\": false
