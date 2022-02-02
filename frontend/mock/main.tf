@@ -24,5 +24,5 @@ resource "random_string" "frontend" {
 }
 
 output "frontend_name" {
-    value = "frontend-${random_string.backend.result}"
+    value = "frontend-${random_string.frontend.result}"
 }
