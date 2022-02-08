@@ -29,6 +29,7 @@ resource "aws_iam_role" "env0_deployer_role" {
 
   max_session_duration = 18000
 
+  # Change to your policy
   managed_policy_arns = [ "arn:aws:iam::aws:policy/AdministratorAccess",]
 
   # Terraform's "jsonencode" function converts a
@@ -52,7 +53,7 @@ resource "aws_iam_role" "env0_deployer_role" {
   })
 
   tags = {
-    owner = "Andrew Way"
+    note = "Created through env0 Bootstrap"
   }
 }
 
