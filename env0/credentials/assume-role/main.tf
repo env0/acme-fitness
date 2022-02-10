@@ -9,7 +9,7 @@ terraform {
       version = "~> 3.1.0"
     }
     env0 = {
-      source = "env0/env0"
+      source  = "env0/env0"
       version = ">= 0.2.26"
     }
   }
@@ -19,18 +19,19 @@ provider "aws" {
   region = "us-west-2"
 }
 
-provider "env0" {
+variable "assume_role_name" {
+  type        = string
+  default     = "env0-deployer-role"
+  description = "name used for both env0 and AWS"
 }
 
-provider "random" {}
-
 resource "aws_iam_role" "env0_deployer_role" {
-  name = "env0-deployer-role"
+  name = var.assume_role_name
 
   max_session_duration = 18000
 
   # Change to your policy
-  managed_policy_arns = [ "arn:aws:iam::aws:policy/AdministratorAccess",]
+  managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess", ]
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -64,7 +65,7 @@ resource "random_string" "externalid" {
 }
 
 resource "env0_aws_credentials" "credentials" {
-  name        = "AWS Admin"
+  name        = var.assume_role_name
   arn         = aws_iam_role.env0_deployer_role.arn
   external_id = random_string.externalid.result
 }

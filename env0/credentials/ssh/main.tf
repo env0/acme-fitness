@@ -15,15 +15,6 @@ terraform {
   }
 }
 
-provider "tls" {
-  # Configuration options
-}
-
-provider "env0" {
-  # Configuration options
-  # Set ENV0_API_KEY & ENV0_SECRET_KEY (create API keys in your env0 ORG Settings)
-}
-
 provider "github" {
   # Change to your owner
   # Set your PAT or GitHub App environment variables e.g. GITHUB_TOKEN
@@ -31,18 +22,19 @@ provider "github" {
   owner = "env0-poc"
 }
 
+variable "key_name" {
+  type        = string
+  default     = "env0 GitHub SSH Key"
+  description = "Used both in GitHub and env0 names"
+}
+
 resource "github_user_ssh_key" "github_key" {
-  title = "env0 Access Key"
+  title = var.key_name
   key   = tls_private_key.github_key.public_key_openssh
 }
 
 resource "tls_private_key" "github_key" {
   algorithm = "RSA"
-}
-
-variable "key_name" {
-  type    = string
-  default = "GitHub SSH Key"
 }
 
 resource "env0_ssh_key" "github" {

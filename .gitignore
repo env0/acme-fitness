@@ -1,5 +1,5 @@
 # Local .terraform directories
-**/.terraform/*
+**/.terraform
 
 # .tfstate files
 *.tfstate
@@ -8,7 +8,7 @@
 .terraform.lock.hcl
 
 # local secrets for env0 API KEY and SECRET for ease of bootstrapping
-secret.sh
+secrets.sh
 
 # Crash log files
 crash.log
