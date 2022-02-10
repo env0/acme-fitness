@@ -27,8 +27,8 @@ projects = {
       requires_approval_default     = true
       skip_apply_when_plan_is_empty = true
       skip_redundant_deployments    = true
-      continuous_deployment_default = false
-      run_pull_request_plan_default = false
+      continuous_deployment_default = true
+      run_pull_request_plan_default = true
     }
   }
 }
