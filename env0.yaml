@@ -7,4 +7,4 @@ deploy:
         - pwd
         - ls -la
         - export
-        - if [[ -e .env0/tfinit.sh ]] then ./.env0/tfinit.sh elif
+        - if [[ -e .env0/tfinit.sh ]]; then ./.env0/tfinit.sh elif
