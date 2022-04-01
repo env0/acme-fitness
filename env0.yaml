@@ -4,7 +4,20 @@ deploy:
   steps:
     terraformInit:
       before:
-        - pwd
-        - ls -la
-        - export
         - if [[ -e $ENV0_TEMPLATE_DIR/.env0/tfinit.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/tfinit.sh; fi
+    terraformPlan:
+      after:
+        - if [[ -e $ENV0_TEMPLATE_DIR/.env0/tfplan-after.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/tfplan-after.sh; fi
+  onCompletion:
+    - if [[ -e $ENV0_TEMPLATE_DIR/.env0/complete.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/complete.sh; fi
+  onSuccess:
+    - if [[ -e $ENV0_TEMPLATE_DIR/.env0/success.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/success.sh; fi
+  onFailure:
+    - if [[ -e $ENV0_TEMPLATE_DIR/.env0/failure.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/failure.sh; fi
+destroy:
+  onCompletion:
+    - if [[ -e $ENV0_TEMPLATE_DIR/.env0/complete.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/complete.sh; fi
+  onSuccess:
+    - if [[ -e $ENV0_TEMPLATE_DIR/.env0/success.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/success.sh; fi
+  onFailure:
+    - if [[ -e $ENV0_TEMPLATE_DIR/.env0/failure.sh ]]; then $ENV0_TEMPLATE_DIR/.env0/failure.sh; fi
