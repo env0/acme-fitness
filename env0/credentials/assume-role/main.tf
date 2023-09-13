@@ -2,15 +2,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.74.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.1.0"
+      version = "~> 5.16.0"
     }
     env0 = {
       source  = "env0/env0"
-      version = ">= 0.2.26"
+      version = "~> 1.14"
     }
   }
 }
@@ -22,7 +18,12 @@ provider "aws" {
 variable "assume_role_name" {
   type        = string
   default     = "env0-deployer-role"
-  description = "name used for both env0 and AWS"
+  description = "name used for AWS"
+}
+
+variable "orgid" {
+  type        = string
+  description = "your env0 org id (you can find it under organization > settings)"
 }
 
 resource "aws_iam_role" "env0_deployer_role" {
@@ -46,7 +47,7 @@ resource "aws_iam_role" "env0_deployer_role" {
         "Action" : "sts:AssumeRole",
         "Condition" : {
           "StringEquals" : {
-            "sts:ExternalId" : "${random_string.externalid.result}"
+            "sts:ExternalId" : "${var.orgid}"
           }
         }
       }
@@ -58,19 +59,7 @@ resource "aws_iam_role" "env0_deployer_role" {
   }
 }
 
-resource "random_string" "externalid" {
-  length  = 32
-  upper   = true
-  special = false
-}
-
 resource "env0_aws_credentials" "credentials" {
-  name        = var.assume_role_name
+  name        = aws_iam_role.env0_deployer_role.arn
   arn         = aws_iam_role.env0_deployer_role.arn
-  external_id = random_string.externalid.result
-}
-
-output "externalid" {
-  value     = random_string.externalid.result
-  sensitive = true
 }
