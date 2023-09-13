@@ -29,7 +29,7 @@ variable "orgid" {
 resource "aws_iam_role" "env0_deployer_role" {
   name = var.assume_role_name
 
-  max_session_duration = 18000
+  max_session_duration = 18000  # default configuration for env0 is 5 hours (do not modify)
 
   # Change to your policy
   managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess", ]
@@ -60,6 +60,10 @@ resource "aws_iam_role" "env0_deployer_role" {
 }
 
 resource "env0_aws_credentials" "credentials" {
-  name        = aws_iam_role.env0_deployer_role.arn
-  arn         = aws_iam_role.env0_deployer_role.arn
+  name = aws_iam_role.env0_deployer_role.arn
+  arn  = aws_iam_role.env0_deployer_role.arn
+}
+
+output "aws_iam_role_arn" {
+  value = aws_iam_role.env0_deployer_role.arn
 }
