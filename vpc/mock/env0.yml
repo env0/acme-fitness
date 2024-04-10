@@ -1,10 +1,14 @@
 version: 2
 
 deploy:
+  onSuccess:
+    - name: "Update env0 project variable"
+      run: ./update_variable.sh
+  
   steps:
     setupVariables:
       after:
-       - name: "Custom Flow Step: Install Checkov"
+       - name: "Update latest AWS CLI"
          run: |
            curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
            unzip -q awscliv2.zip
@@ -12,7 +16,7 @@ deploy:
            ln -s /usr/local/bin/aws-cli-v2/aws /usr/local/bin/awsv2
     terraformPlan:
       after:
-       - name: "Custom Flow Step: Checkov Security Scan"
+       - name: "Check AWS CLI Version"
          run: |
            awsv2 --version
 
