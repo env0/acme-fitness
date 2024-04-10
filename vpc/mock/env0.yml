@@ -15,7 +15,7 @@ deploy:
          run: |
            curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
            unzip -q awscliv2.zip
-           sudo ./aws/install -i /usr/local/aws-cli-v2 -b /usr/local/bin/aws-cli-v2
+           ./aws/install -i /usr/local/aws-cli-v2 -b /usr/local/bin/aws-cli-v2
     terraformPlan:
       after:
        - name: "Post Update: Check AWS CLI Version"
