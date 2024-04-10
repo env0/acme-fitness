@@ -8,15 +8,17 @@ deploy:
   steps:
     setupVariables:
       after:
+       - name: "Pre Update: Check AWS CLI Version"
+         run: |
+           awsv2 --version
        - name: "Update latest AWS CLI"
          run: |
            curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
            unzip -q awscliv2.zip
-           aws/install -i /usr/local/aws-cli-v2 -b /usr/local/bin/aws-cli-v2
-           ln -s /usr/local/bin/aws-cli-v2/aws /usr/local/bin/awsv2
+           sudo ./aws/install -i /usr/local/aws-cli-v2 -b /usr/local/bin/aws-cli-v2
     terraformPlan:
       after:
-       - name: "Check AWS CLI Version"
+       - name: "Post Update: Check AWS CLI Version"
          run: |
            awsv2 --version
 
