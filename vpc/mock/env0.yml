@@ -21,7 +21,7 @@ deploy:
       after:
        - name: "Post Update: Check AWS CLI Version"
          run: |
-           awsv2 --version
+           aws-cli --version
 
 
 #deploy:
