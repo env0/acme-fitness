@@ -1,7 +1,7 @@
 #####
 # filename: cost-policy.rego
 # purpose: restrict users from deploying over a certain amount of (estimated) cost.
-# note: $30/month with cost_approvers hard_coded.
+# note: $8/month with cost_approvers hard_coded.
 #####
 
 package env0
@@ -14,12 +14,12 @@ has_key(x, k) {
 
 ## STATIC VARIABLES
 # Cost Approvers
-cost_approvers := "539edd93-be20-46e8-91f4-3c020d15e9d9"  # Cost Approvers
-cost_limit := 15 # USD per month
+cost_approvers := "Cost Approvers"  # Cost Approvers
+cost_limit := 8 # USD per month
 
 # METADATA
 # title: require approval on cost estimation
-# description: require approval from cost_approvers if cost estimation is returning any value greater than $15/month on the plan
+# description: require approval from cost_approvers if cost estimation is returning any value greater than COST_LIMIT on the plan
 pending[message] {
   input.costEstimation.monthlyCostDiff != 0
   input.costEstimation.totalMonthlyCost > cost_limit
@@ -40,7 +40,7 @@ allow[format(rego.metadata.rule())] {
 }
 
 any_approver_present {
-  input.approvers[_].teams[_].id == cost_approvers
+  input.approvers[_].teams[_].name == cost_approvers
 }
 
 # METADATA
