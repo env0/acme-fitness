@@ -1,5 +1,9 @@
+module "random_name" {
+  source = "../random_pet"
+
+}
 resource "aws_s3_bucket" "this" {
-  bucket        = "${var.prefix}-${var.bucketname}"
+  bucket        = "${var.prefix}-${var.bucketname}-${module.random_name.name}"
   force_destroy = true
 }
 
