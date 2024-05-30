@@ -21,3 +21,5 @@ then your principal block in your trust policy should look like:
         },
 ...
 ```
+
+** `env0.system-env-vars.json` is a file that is generated in env0 that contains a json representation of all the environment variable values. we use this file to extract the organization id to be used a value in the assume role.
