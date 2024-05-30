@@ -7,8 +7,8 @@ variable "vcs" {
   default = "GitHub"
 
   validation {
-    condition     = contains(local.SUPPORTED_VCS, var.vcs)
-    error_message = "Must be one ${local.SUPPORTED_VCS}"
+    condition     = contains(["GitHub"], var.vcs)
+    error_message = "Must be one [\"GitHub\"]"
   }
 }
 
