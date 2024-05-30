@@ -1,16 +1,4 @@
 
-# provider "env0" {
-#   # env0 Provider expects to find the environment variables defined.
-#   # to create an API key see:  https://docs.env0.com/docs/api-keys
-#   # ENV0_API_KEY    
-#   # ENV0_API_SECRET
-#   # or using tf provider variables
-#   # api_key = ""
-#   # api_secret = ""
-# }
-
-### RESOURCES 
-
 resource "aws_iam_role" "env0_cost_role" {
   name = var.cost_assume_role_name
 

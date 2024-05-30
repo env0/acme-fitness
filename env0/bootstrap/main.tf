@@ -14,7 +14,6 @@ module "assume-role" {
 # Create GitHub SSH Key
 module "github-sshkey" {
   source = "../credentials/ssh"
-
   # optional
   key_name = "env0 GitHub key"
 }
