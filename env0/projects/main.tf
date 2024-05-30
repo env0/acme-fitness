@@ -2,10 +2,9 @@ terraform {
   required_providers {
     env0 = {
       source  = "env0/env0"
-      version = ">= 0.2.26"
+      version = ">= 1.0.0"
     }
   }
-  experiments = [module_variable_optional_attrs]
 }
 
 # create the project with the name and description
