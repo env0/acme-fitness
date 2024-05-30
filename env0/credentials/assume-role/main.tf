@@ -1,10 +1,3 @@
-
-
-### VARIABLES
-
-
-### RESOURCES 
-
 resource "aws_iam_role" "env0_deployer_role" {
   name = var.assume_role_name
 
