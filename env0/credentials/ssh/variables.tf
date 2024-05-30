@@ -12,7 +12,6 @@ variable "vcs" {
   }
 }
 
-
 variable "key_name" {
   type        = string
   default     = "env0 SSH Key"
