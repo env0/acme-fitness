@@ -1,20 +1,10 @@
-terraform {
-  required_providers {
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.6.2"
-    }
-  }
-}
-
-provider "random" {
-  # Configuration options
-}
 
 resource "random_id" "vpc" {
-  byte_length = 8
+  count       = (var.getRealVPC) ? 0 : 1
+  byte_length = 5
 }
 
-output "vpc_id" {
-  value = "vpc-${random_id.vpc.hex}"
+data "aws_vpc" "this" {
+  count   = (var.getRealVPC) ? 1 : 0
+  default = true
 }
