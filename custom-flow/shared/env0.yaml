@@ -1,0 +1,16 @@
+version: 2
+
+deploy:
+  steps:
+    setupVariables:
+      after:
+        - name: Fetch Secrets
+          run: echo "Fetching Secrets"
+    terraformPlan:
+      after:
+        - name: IaC Static Code Analysis  
+          run: |
+            echo "Running Custom Scan"
+            echo "..."
+            echo "Complete! No Vulnerabilities Detected"
+            
