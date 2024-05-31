@@ -51,6 +51,13 @@ allow[format(rego.metadata.rule())] {
 }
 
 # METADATA
+# title: auto approve if diff cost == 0
+# description: approve automatically if the diff cost is 0.
+allow[format(rego.metadata.rule())] {
+  input.costEstimation.monthlyCostDiff == 0
+}
+
+# METADATA
 # title: allow if no monthly cost
 # description: approve automatically if the plan no cost estimation
 allow[format(rego.metadata.rule())] {
