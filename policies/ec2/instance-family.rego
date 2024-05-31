@@ -13,10 +13,10 @@ format(meta) := meta.description
 # METADATA
 # title: require approval on improper instance type
 # description: require approval from anyone
-pending[message] {
+deny[message] {
   not startswith(input.plan.variables.instance_type.value, "t3a")
   count(input.approvers) == 0
-  message := sprintf("EC2 RULE 1: require approval if instance family is not of t3a, instance desired: %v", [input.plan.variables.instance_type.value])
+  message := sprintf("EC2 RULE 1: instance family is not of t3a, instance desired: %v", [input.plan.variables.instance_type.value])
 }
 
 warn[message] {
