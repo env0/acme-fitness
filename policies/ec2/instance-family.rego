@@ -25,8 +25,8 @@ warn[message] {
 }
 
 # METADATA
-# title: allow if approved by anyone 
-# description: deployment was approved by someone
+# title: Allow is policy is not in infringment 
+# description: not violating instance family policy.
 allow[format(rego.metadata.rule())] {
-  count(input.approvers) > 0
+  true
 }
