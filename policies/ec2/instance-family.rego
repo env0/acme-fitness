@@ -26,7 +26,7 @@ warn[message] {
 
 # METADATA
 # title: allow if approved by anyone 
-# description: 
+# description: deployment was approved by someone
 allow[format(rego.metadata.rule())] {
   count(input.approvers) > 0
 }
