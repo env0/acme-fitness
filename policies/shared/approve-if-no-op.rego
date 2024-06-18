@@ -16,6 +16,6 @@ any_resources_with_change {
 # METADATA
 # title: allow if someone approves
 # description: proceed when someone has approved
-allow[format(rego.metadata.rule())] {
-  count(input.approvers) > 0
-}
+#allow[format(rego.metadata.rule())] {
+#  count(input.approvers) > 0
+#}
