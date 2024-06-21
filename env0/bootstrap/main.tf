@@ -12,11 +12,11 @@ module "assume-role" {
 }
 
 # Create GitHub SSH Key
-module "github-sshkey" {
-  source = "../credentials/ssh"
-  # optional
-  key_name = "env0 GitHub key"
-}
+# module "github-sshkey" {
+#   source = "../credentials/ssh"
+#   # optional
+#   key_name = "env0 GitHub key"
+# }
 
 # Create default env0 Projects with Policies
 
