@@ -11,3 +11,8 @@ variable "instance_type" {
 variable "vpc_id" {
   type = string
 }
+
+variable "region" {
+  type    = string
+  default = "us-west-2"
+}
