@@ -20,18 +20,18 @@ variable "templates" {
   description = "list of templates"
   default = {
     ec2 = {
-      type = "opentofu"
-      path = "modules/ec2"
+      type        = "opentofu"
+      path        = "modules/ec2"
       description = "standard ec2 instance"
     }
     s3 = {
-      type = "opentofu"
-      path = "modules/s3"
+      type        = "opentofu"
+      path        = "modules/s3"
       description = "simple private s3 bucket"
     }
     vpc = {
-      type = "opentofu"
-      path = "modules/vpc"
+      type        = "opentofu"
+      path        = "modules/vpc"
       description = "random id or default vpc"
     }
   }
