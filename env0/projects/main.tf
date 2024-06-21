@@ -6,8 +6,8 @@ resource "env0_project" "team_project" {
 resource "env0_project" "environment_projects" {
   for_each = toset(var.team_environments)
 
-  name        = "${var.team_name}-${each.value}"
-  description = "${each.value} environment for ${var.team_name} project"
+  name              = "${var.team_name}-${each.value}"
+  description       = "${each.value} environment for ${var.team_name} project"
   parent_project_id = env0_project.team_project.id
 }
 

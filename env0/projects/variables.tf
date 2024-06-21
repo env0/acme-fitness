@@ -7,13 +7,13 @@ variable "team_name" {
 variable "team_environments" {
   description = "List of team environments"
   type        = list(string)
-  default     = [ "Dev", "Stage", "Prod" ]
+  default     = ["Dev", "Stage", "Prod"]
 }
 
 variable "policies" {
   description = "Policies in JSON format"
   type        = map(any)
-  default     = {
+  default = {
     Dev = {
       number_of_environments        = 3
       number_of_environments_total  = 10
