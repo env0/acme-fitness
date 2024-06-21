@@ -9,7 +9,14 @@ variable "github_installation_id" {
 }
 
 variable "templates" {
-  type = map(object)
+  type = map(
+    object({
+      type        = string
+      path        = string
+      description = string
+    })
+  )
+
   description = "list of templates"
   default = {
     ec2 = {
