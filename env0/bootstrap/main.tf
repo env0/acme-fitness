@@ -1,6 +1,6 @@
 # taking advantage of some tricks in env0
 locals {
-  env_vars = jsondecode(file("env0.env-vars.json"))
+  env_vars = jsondecode(file("env0.system-env-vars.json"))
 }
 
 # Create Assume Role
