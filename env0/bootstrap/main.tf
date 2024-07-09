@@ -141,5 +141,6 @@ resource "env0_environment" "default_projects" {
 
   depends_on = [ env0_configuration_variable.environment_policies, 
                  env0_configuration_variable.team_environments, 
-                 env0_configuration_variable.environment_policies ]
+                 env0_configuration_variable.environment_policies,
+                 env0_template_project_assignment.projects ]
 }
