@@ -11,7 +11,6 @@ module "pet-name" {
 module "assume-role" {
   source = "../credentials/assume-role"
 
-  # optional
   assume_role_name      = "env0-deployer-role-${module.pet-name.name}"
   cost_assume_role_name = "env0-cost-role-${module.pet-name.name}"
 }
@@ -33,42 +32,109 @@ data "env0_template" "this" {
 
 # Create default env0 Projects with Policies
 
-# module "env0-projects" {
-#   source = "../projects"
+resource "env0_template" "projects" {
+  name                   = "Team Projects"
+  type                   = "opentofu"
+  description            = "Project Factory for onboarding new teams"
+  opentofu_version       = "latest"
+  repository             = data.env0_template.this.repository
+  path                   = "env0/projects"
+  github_installation_id = data.env0_template.this.github_installation_id
+}
 
-#   projects = {
-#     dev = {
-#       name        = "Dev"
-#       description = "is back for more exciting Infrastructure as Code work"
-#       credential  = "env0-deployer-role"
-#       policy = {
-#         disable_destroy_environments  = false
-#         include_cost_estimation       = true
-#         number_of_environments        = "5"
-#         number_of_environments_total  = "10"
-#         requires_approval_default     = false
-#         skip_apply_when_plan_is_empty = true
-#         skip_redundant_deployments    = true
-#         continuous_deployment_default = true
-#         run_pull_request_plan_default = false
-#       }
-#     },
-#     prod = {
-#       name        = "Prod"
-#       description = "We're in production!"
-#       credential  = "env0-deployer-role"
-#       policy = {
-#         disable_destroy_environments  = true
-#         include_cost_estimation       = true
-#         number_of_environments        = null
-#         number_of_environments_total  = null
-#         requires_approval_default     = true
-#         skip_apply_when_plan_is_empty = true
-#         skip_redundant_deployments    = true
-#         continuous_deployment_default = true
-#         run_pull_request_plan_default = true
-#       }
-#     }
-#   }
-# }
+resource "env0_configuration_variable" "team_name" {
+  template_id = env0_template.projects.id
+  name        = "team_name"
+  description = "main project name for team"
+  is_required = true
+  regex       = "[a-zA-Z0-9-_]*"
+  type        = "terraform"
+}
 
+resource "env0_configuration_variable" "team_environments" {
+  template_id   = env0_template.projects.id
+  name          = "team_environments"
+  description   = "staging environments for team"
+  format        = "JSON"
+  type          = "terraform"
+  value         = "[\"Dev\", \"Stage\", \"Prod\"]"
+}
+
+resource "env0_configuration_variable" "environment_policies" {
+  template_id   = env0_template.projects.id
+  name          = "policies"
+  description   = "the default project policies for each staging environment"
+  format        = "JSON"
+  type          = "terraform"
+  value = <<-EOT
+  { 
+    Dev = {
+      disable_destroy_environments  = false
+      number_of_environments        = 3
+      number_of_environments_total  = 10
+      requires_approval_default     = false
+      default_ttl                   = "12-h"
+      max_ttl                       = "1-w"
+      include_cost_estimation       = true
+      skip_apply_when_plan_is_empty = true
+      skip_redundant_deployments    = true
+      continuous_deployment_default = true
+      run_pull_request_plan_default = true
+      force_remote_backend          = true
+      drift_detection_cron          = "0 1 * * *"
+    }
+    Stage = {
+      disable_destroy_environments  = false
+      number_of_environments        = null
+      number_of_environments_total  = null
+      requires_approval_default     = false
+      default_ttl                   = null
+      max_ttl                       = null
+      include_cost_estimation       = true
+      skip_apply_when_plan_is_empty = true
+      skip_redundant_deployments    = true
+      continuous_deployment_default = true
+      run_pull_request_plan_default = true
+      force_remote_backend          = true
+      drift_detection_cron          = "0 3 * * 7"
+    }
+    Prod = {
+      disable_destroy_environments  = true
+      number_of_environments        = null
+      number_of_environments_total  = null
+      requires_approval_default     = false
+      default_ttl                   = null
+      max_ttl                       = null
+      include_cost_estimation       = true
+      skip_apply_when_plan_is_empty = true
+      skip_redundant_deployments    = true
+      continuous_deployment_default = true
+      run_pull_request_plan_default = true
+      force_remote_backend          = true
+      drift_detection_cron          = "0 5 * * 7"
+    }
+  }
+  EOT
+}
+
+
+resource "env0_environment" "default_projects" {
+  count = var.create_projects ? 1 : 0
+
+  name                       = "${var.default_team_name} Project"
+  project_id                 = data.env0_environment.this.project_id
+  template_id                = env0_template.projects.id
+  approve_plan_automatically = true
+  is_remote_backend          = true
+  removal_strategy           = "mark_as_archived"
+  workspace                  = "${var.default_team_name}_project"
+
+  configuration {
+    name  = "team_name"
+    value = var.default_team_name
+  }
+
+  depends_on = [ env0_configuration_variable.team_name, 
+                 env0_configuration_variable.team_environments, 
+                 env0_configuration_variable.environment_policies ]
+}

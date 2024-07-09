@@ -24,10 +24,3 @@ provider "env0" {
 provider "aws" {
   region = var.region
 }
-
-
-locals {
-  json_data = jsondecode(file("env0.system-env-vars.json"))
-
-  org_id = local.json_data.ENV0_ORGANIZATION_ID
-}
