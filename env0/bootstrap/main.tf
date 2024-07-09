@@ -42,6 +42,11 @@ resource "env0_template" "projects" {
   github_installation_id = data.env0_template.this.github_installation_id
 }
 
+resource "env0_template_project_assignment" "projects" {
+  template_id = env0_template.projects.id
+  project_id  = data.env0_environment.this.project_id
+}
+
 resource "env0_configuration_variable" "team_name" {
   template_id = env0_template.projects.id
   name        = "team_name"
