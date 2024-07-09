@@ -137,6 +137,7 @@ resource "env0_environment" "default_projects" {
   configuration {
     name  = "team_name"
     value = var.default_team_name
+    type  = "terraform"
   }
 
   depends_on = [ env0_configuration_variable.environment_policies, 
