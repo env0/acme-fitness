@@ -64,7 +64,7 @@ resource "env0_configuration_variable" "environment_policies" {
   template_id   = env0_template.projects.id
   name          = "policies"
   description   = "the default project policies for each staging environment"
-  format        = "JSON"
+  format        = "HCL"
   type          = "terraform"
   value = <<-EOT
   { 
@@ -134,7 +134,7 @@ resource "env0_environment" "default_projects" {
     value = var.default_team_name
   }
 
-  depends_on = [ env0_configuration_variable.team_name, 
+  depends_on = [ env0_configuration_variable.environment_policies, 
                  env0_configuration_variable.team_environments, 
                  env0_configuration_variable.environment_policies ]
 }
