@@ -10,7 +10,6 @@ terraform {
     }
     env0 = {
       source  = "env0/env0"
-      version = ">= 1.15"
     }
   }
 }

@@ -1,3 +1,10 @@
+
+locals {
+  env-vars = jsondecode(file("env0.system-env-vars.json"))
+  org_id = local.env-vars.ENV0_ORGANIZATION_ID
+}
+
+
 resource "aws_iam_role" "env0_deployer_role" {
   name = var.assume_role_name
 
