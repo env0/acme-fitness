@@ -112,5 +112,11 @@ resource "env0_environment" "default_projects" {
     env0_configuration_variable.team_environments,
     env0_configuration_variable.environment_policies,
     env0_template_project_assignment.projects,
-  env0_api_key.mgmt]
+    env0_api_key.mgmt]
+
+  lifecycle {
+    ignore_changes = [
+      variable_sets
+    ]
+  }
 }
