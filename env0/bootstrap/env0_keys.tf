@@ -5,6 +5,8 @@ resource "env0_api_key" "mgmt" {
 resource "env0_variable_set" "env0_keys" {
   name        = "Control-ENV0_API_KEY"
   description = "mgmt api key - control plane org api key"
+  scope       = "project"
+  scope_id    = data.env0_environment.this.project_id
 
   variable {
     name  = "ENV0_API_KEY"
