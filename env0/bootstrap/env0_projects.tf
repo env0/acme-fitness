@@ -100,14 +100,17 @@ resource "env0_environment" "default_projects" {
   workspace                  = "${var.default_team_name}_project"
 
   configuration {
-    name  = "team_name"
-    value = var.default_team_name
-    type  = "terraform"
+    name        = "team_name"
+    value       = var.default_team_name
+    type        = "terraform"
+    description = "main project name for team"
+    regex       = "[a-zA-Z0-9-_]*"
+    is_required = true
   }
 
   depends_on = [env0_configuration_variable.environment_policies,
     env0_configuration_variable.team_environments,
     env0_configuration_variable.environment_policies,
     env0_template_project_assignment.projects,
-    env0_api_key.mgmt ]
+  env0_api_key.mgmt]
 }
