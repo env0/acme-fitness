@@ -57,21 +57,21 @@ resource "env0_configuration_variable" "team_name" {
 }
 
 resource "env0_configuration_variable" "team_environments" {
-  template_id   = env0_template.projects.id
-  name          = "team_environments"
-  description   = "staging environments for team"
-  format        = "JSON"
-  type          = "terraform"
-  value         = "[\"Dev\", \"Stage\", \"Prod\"]"
+  template_id = env0_template.projects.id
+  name        = "team_environments"
+  description = "staging environments for team"
+  format      = "JSON"
+  type        = "terraform"
+  value       = "[\"Dev\", \"Stage\", \"Prod\"]"
 }
 
 resource "env0_configuration_variable" "environment_policies" {
-  template_id   = env0_template.projects.id
-  name          = "policies"
-  description   = "the default project policies for each staging environment"
-  format        = "HCL"
-  type          = "terraform"
-  value = <<-EOT
+  template_id = env0_template.projects.id
+  name        = "policies"
+  description = "the default project policies for each staging environment"
+  format      = "HCL"
+  type        = "terraform"
+  value       = <<-EOT
   { 
     Dev = {
       disable_destroy_environments  = false
@@ -140,8 +140,8 @@ resource "env0_environment" "default_projects" {
     type  = "terraform"
   }
 
-  depends_on = [ env0_configuration_variable.environment_policies, 
-                 env0_configuration_variable.team_environments, 
-                 env0_configuration_variable.environment_policies,
-                 env0_template_project_assignment.projects ]
+  depends_on = [env0_configuration_variable.environment_policies,
+    env0_configuration_variable.team_environments,
+    env0_configuration_variable.environment_policies,
+  env0_template_project_assignment.projects]
 }
