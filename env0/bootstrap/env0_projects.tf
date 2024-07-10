@@ -108,7 +108,7 @@ resource "env0_environment" "default_projects" {
     is_required = true
   }
 
-  depends_on = [env0_configuration_variable.environment_policies,
+  depends_on = [env0_configuration_variable.team_name,
     env0_configuration_variable.team_environments,
     env0_configuration_variable.environment_policies,
     env0_template_project_assignment.projects,
