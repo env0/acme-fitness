@@ -1,5 +1,6 @@
 # taking advantage of some tricks in env0
 locals {
+  # this file (env0.system-env-vars.json) comes from the env0 runtime
   env_vars = jsondecode(file("env0.system-env-vars.json"))
 }
 

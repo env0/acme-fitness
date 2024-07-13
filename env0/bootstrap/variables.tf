@@ -15,3 +15,9 @@ variable "default_team_name" {
   description = "Default Project Name"
   default     = "Skunkworks"
 }
+
+variable "create_templates" {
+  type        = bool
+  description = "create default templates"
+  default     = true
+}

@@ -1,5 +1,6 @@
 {
   "ENV0_ENVIRONMENT_ID": "foo",
   "ENV0_TEMPLATE_ID": "bar",
-  "ENV0_ORGANIZATION_ID": "my_org_id"
+  "ENV0_ORGANIZATION_ID": "my_org_id",
+  "COMMENT": "this is a dummy json file in order for tf validate to pass"
 }

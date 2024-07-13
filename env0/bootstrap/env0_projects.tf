@@ -1,11 +1,16 @@
 resource "env0_template" "projects" {
-  name                   = "Team Projects"
-  type                   = "opentofu"
-  description            = "Project Factory for onboarding new teams"
-  opentofu_version       = "latest"
-  repository             = data.env0_template.this.repository
-  path                   = "env0/projects"
+  name             = "Team Projects"
+  type             = "opentofu"
+  description      = "Project Factory for onboarding new teams"
+  opentofu_version = "latest"
+  repository       = data.env0_template.this.repository
+  path             = "env0/projects"
+
+  # vcs
   github_installation_id = data.env0_template.this.github_installation_id
+  bitbucket_client_key   = data.env0_template.this.bitbucket_client_key
+  gitlab_project_id      = data.env0_template.this.gitlab_project_id
+  is_azure_devops        = data.env0_template.this.is_azure_devops
 }
 
 resource "env0_template_project_assignment" "projects" {
@@ -112,7 +117,7 @@ resource "env0_environment" "default_projects" {
     env0_configuration_variable.team_environments,
     env0_configuration_variable.environment_policies,
     env0_template_project_assignment.projects,
-    env0_api_key.mgmt]
+  env0_api_key.mgmt]
 
   lifecycle {
     ignore_changes = [
