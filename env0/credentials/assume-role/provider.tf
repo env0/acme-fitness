@@ -9,7 +9,7 @@ terraform {
       version = "~> 3.6.2"
     }
     env0 = {
-      source  = "env0/env0"
+      source = "env0/env0"
     }
   }
 }
