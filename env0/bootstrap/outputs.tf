@@ -14,7 +14,7 @@ output "github_installation_id" {
 }
 
 output "bitbucket_client_key" {
-  value = data.env0_template.this.bitbucket_client_key
+  value       = data.env0_template.this.bitbucket_client_key
   description = "BitBucket Client Key"
 }
 
@@ -24,12 +24,12 @@ output "bitbucket_client_key" {
 # }
 
 output "token_id" {
-  value = data.env0_template.this.token_id
+  value       = data.env0_template.this.token_id
   description = "Azure DevOps or GitLab Token Id"
-}              
+}
 
 output "is_azure_devops" {
-  value = data.env0_template.this.is_azure_devops
+  value       = data.env0_template.this.is_azure_devops
   description = "is Azure DevOps"
 }
 

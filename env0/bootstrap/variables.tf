@@ -23,11 +23,11 @@ variable "create_templates" {
 }
 
 variable "vcs" {
-  type = string
+  type        = string
   description = "github, gitlab, azure, bitbucket"
-  default = "github"
+  default     = "github"
   validation {
-    condition = contains(["github", "gitlab", "azure", "bitbucket"], var.vcs)
+    condition     = contains(["github", "gitlab", "azure", "bitbucket"], var.vcs)
     error_message = "vcs must be one of github, gitlab, azure, bitbucket"
   }
 }
