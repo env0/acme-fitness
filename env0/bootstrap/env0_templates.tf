@@ -7,7 +7,7 @@ resource "env0_template" "tofu" {
   for_each = toset(local.tofu_templates)
 
   name             = each.key
-  description      = "Default template of ${each.key}"
+  description      = "template of ${each.key}"
   repository       = data.env0_template.this.repository
   path             = "${local.modules_dir}/${each.key}"
   type             = "opentofu"
@@ -21,3 +21,4 @@ resource "env0_template" "tofu" {
   is_azure_devops = var.vcs == "azure" ? data.env0_template.this.is_azure_devops : null
   token_id        = var.vcs == "gitlab" || var.vcs == "azure" ? data.env0_template.this.token_id : null
 }
+
