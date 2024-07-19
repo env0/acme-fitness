@@ -39,7 +39,7 @@ resource "env0_configuration_variable" "team_environments" {
 
 resource "env0_configuration_variable" "default_templates" {
   template_id = env0_template.projects.id
-  name        = "team_environments"
+  name        = "default_templates"
   description = "staging environments for team"
   format      = "JSON"
   type        = "terraform"
