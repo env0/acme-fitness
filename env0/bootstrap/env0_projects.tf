@@ -40,7 +40,7 @@ resource "env0_configuration_variable" "team_environments" {
 resource "env0_configuration_variable" "default_templates" {
   template_id = env0_template.projects.id
   name        = "default_templates"
-  description = "staging environments for team"
+  description = "templates to auto attach to projects"
   format      = "JSON"
   type        = "terraform"
   value       = "[\"vpc\", \"ec2\", \"s3\", \"random_pet\"]"
