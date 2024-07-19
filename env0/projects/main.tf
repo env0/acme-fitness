@@ -29,3 +29,16 @@ resource "env0_project_policy" "environment_policies" {
   force_remote_backend          = var.policies[each.key].force_remote_backend
   drift_detection_cron          = var.policies[each.key].drift_detection_cron
 }
+
+data "env0_template" "defaults" {
+  for_each = toset(var.default_templates)
+
+  name = each.key
+}
+
+resource "env0_template_project_assignment" "assignment" {
+  for_each = toset(var.default_templates)
+
+  template_id = data.env0_template.defaults[each.key].id
+  project_id  = env0_project.environment_projects.id
+}

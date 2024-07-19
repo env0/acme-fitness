@@ -75,3 +75,9 @@ variable "policies" {
     }
   }
 }
+
+variable "default_templates" {
+  type        = list(string)
+  description = "list of templates to add to project"
+  default     = ["vpc", "ec2", "s3", "random_pet"]
+}

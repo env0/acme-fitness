@@ -37,6 +37,15 @@ resource "env0_configuration_variable" "team_environments" {
   value       = "[\"Dev\", \"Stage\", \"Prod\"]"
 }
 
+resource "env0_configuration_variable" "default_templates" {
+  template_id = env0_template.projects.id
+  name        = "team_environments"
+  description = "staging environments for team"
+  format      = "JSON"
+  type        = "terraform"
+  value       = "[\"vpc\", \"ec2\", \"s3\", \"random_pet\"]"
+}
+
 resource "env0_configuration_variable" "environment_policies" {
   template_id = env0_template.projects.id
   name        = "policies"
