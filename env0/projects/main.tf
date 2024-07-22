@@ -8,8 +8,16 @@ locals {
   }
 }
 
-output "template_project_pair" {
-  value = local.template_project_pair
+output "template_project" {
+  value = setproduct(toset(var.team_environments), toset(var.default_templates))
+}
+
+output "team_name" {
+  value = var.team_name
+}
+
+output "team_environments" {
+  value = var.team_environments
 }
 
 resource "env0_project" "team_project" {
