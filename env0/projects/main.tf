@@ -1,3 +1,17 @@
+locals {
+  template_project_pair = {
+    for k, v in setproduct(toset(var.team_environments), toset(var.default_templates)) :
+    join(",", k) => {
+      environment = "${v[0]}",
+      template    = "${v[1]}"
+    }
+  }
+}
+
+output "template_project_pair" {
+  value = local.template_project_pair
+}
+
 resource "env0_project" "team_project" {
   name        = var.team_name
   description = "Team project for ${var.team_name}"
@@ -37,8 +51,8 @@ data "env0_template" "defaults" {
 }
 
 resource "env0_template_project_assignment" "assignment" {
-  for_each = toset(var.default_templates)
+  for_each = local.template_project_pair
 
-  template_id = data.env0_template.defaults[each.key].id
-  project_id  = env0_project.environment_projects.id
+  template_id = data.env0_template.defaults[each.value.template].id
+  project_id  = env0_project.environment_projects[each.value.environment].id
 }
