@@ -1,5 +1,6 @@
 resource "env0_module" "vpc" {
-  module_name         = "vpc-test-2"
+  module_name         = "vpc-test-3"
+  module_provider     = ""
   repository          = data.env0_template.this.repository
   path                = "modules/vpc"
   tag_prefix          = "vpc"
