@@ -29,6 +29,7 @@ resource "env0_module" "aws" {
   repository          = data.env0_template.this.repository
   path                = "modules/s3"
   tag_prefix          = "s3"
+  module_test_enabled = false
   opentofu_version    = "latest"
 
   # vcs
