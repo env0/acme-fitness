@@ -1,6 +1,5 @@
 resource "env0_module" "vpc" {
-  module_name         = "vpc"
-  module_provider     = "aws"
+  module_name         = "vpc-test-2"
   repository          = data.env0_template.this.repository
   path                = "modules/vpc"
   tag_prefix          = "vpc"
@@ -8,7 +7,7 @@ resource "env0_module" "vpc" {
   opentofu_version    = "latest"
 
   # vcs
-# vcs configuration
+  # vcs configuration
   github_installation_id = var.vcs == "github" ? data.env0_template.this.github_installation_id : null
   bitbucket_client_key   = var.vcs == "bitbucket" ? data.env0_template.this.bitbucket_client_key : null
   # gitlab_project_id    = data.env0_template.this.gitlab_project_id

@@ -106,13 +106,13 @@ resource "env0_configuration_variable" "environment_policies" {
 resource "env0_environment" "default_projects" {
   count = var.create_projects ? 1 : 0
 
-  name                       = "${var.default_team_name} Project"
-  project_id                 = data.env0_environment.this.project_id
-  template_id                = env0_template.projects.id
-  approve_plan_automatically = true
-  is_remote_backend          = true
-  removal_strategy           = "mark_as_archived"
-  workspace                  = "${var.default_team_name}_project"
+  name                             = "${var.default_team_name} Project"
+  project_id                       = data.env0_environment.this.project_id
+  template_id                      = env0_template.projects.id
+  approve_plan_automatically       = true
+  is_remote_backend                = true
+  removal_strategy                 = "mark_as_archived"
+  workspace                        = "${var.default_team_name}_project"
 
   configuration {
     name        = "team_name"
