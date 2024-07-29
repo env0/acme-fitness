@@ -1,10 +1,9 @@
 locals {
   aws_modules = ["vpc", "ec2", "s3", "eks_data"]
-  modules_dir    = "modules"
 }
 
 resource "env0_module" "aws" {
-  for_each = toset (local.aws_modules)
+  for_each = toset(local.aws_modules)
 
   module_name         = each.key
   module_provider     = "aws"

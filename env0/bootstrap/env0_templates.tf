@@ -1,6 +1,5 @@
 locals {
   tofu_templates = ["vpc", "ec2", "s3", "random_pet"]
-  modules_dir    = "modules"
 }
 
 resource "env0_template" "tofu" {

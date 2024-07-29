@@ -1,3 +1,8 @@
+## I don't really like this, but this is a necessary evil
+## env0 currently doesn't support "Administrative Projects"
+## instead we will use the bootstrapper to create another API key
+## the API key will then be assigned as a Project Variable
+
 resource "env0_api_key" "mgmt" {
   name = "control plane"
 }

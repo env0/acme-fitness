@@ -1,7 +1,6 @@
 # taking advantage of some tricks in env0
 locals {
-  # this file (env0.system-env-vars.json) comes from the env0 runtime
-  env_vars = jsondecode(file("env0.system-env-vars.json"))
+  
 }
 
 # Create Assume Role
@@ -16,20 +15,9 @@ module "assume-role" {
   cost_assume_role_name = "env0-cost-role-${module.pet-name.name}"
 }
 
-data "env0_environment" "this" {
-  id = local.env_vars.ENV0_ENVIRONMENT_ID
-}
-
-data "env0_template" "this" {
-  id = local.env_vars.ENV0_TEMPLATE_ID
-}
-
 # Create GitHub SSH Key
 # module "github-sshkey" {
 #   source = "../credentials/ssh"
 #   # optional
 #   key_name = "env0 GitHub key"
 # }
-
-# Create default env0 Projects with Policies
-
