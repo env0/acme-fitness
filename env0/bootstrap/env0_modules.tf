@@ -1,5 +1,5 @@
 locals {
-  aws_modules = ["vpc", "ec2", "s3", "eks_data"]
+  aws_modules = ["vpc", "ec2", "s3"]
 }
 
 resource "env0_module" "aws" {
