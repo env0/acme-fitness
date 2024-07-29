@@ -1,9 +1,16 @@
-resource "env0_module" "vpc" {
-  module_name         = "vpc-test-3"
+locals {
+  aws_modules = ["vpc", "ec2", "s3", "eks_data"]
+  modules_dir    = "modules"
+}
+
+resource "env0_module" "aws" {
+  for_each = toset (local.aws_modules)
+
+  module_name         = each.key
   module_provider     = "aws"
   repository          = data.env0_template.this.repository
-  path                = "modules/vpc"
-  tag_prefix          = "vpc"
+  path                = "${local.modules_dir}/${each.key}"
+  tag_prefix          = each.key
   module_test_enabled = true
   opentofu_version    = "latest"
 
