@@ -23,19 +23,19 @@
 #   #token_name      = var.vcs == "gitlab" ? data.env0_template.this.token_name : null
 # }
 
-resource "env0_module" "aws" {
-  module_name         = "s3_test"
-  module_provider     = "aws"
-  repository          = data.env0_template.this.repository
-  path                = "modules/s3"
-  tag_prefix          = "s3"
+# resource "env0_module" "aws" {
+#   module_name         = "s3_test"
+#   module_provider     = "aws"
+#   repository          = data.env0_template.this.repository
+#   path                = "modules/s3"
+#   tag_prefix          = "s3"
 
-  # vcs
-  # vcs configuration
-  github_installation_id = var.vcs == "github" ? data.env0_template.this.github_installation_id : null
-  bitbucket_client_key   = var.vcs == "bitbucket" ? data.env0_template.this.bitbucket_client_key : null
-  # gitlab_project_id    = data.env0_template.this.gitlab_project_id
-  is_azure_devops = var.vcs == "azure" ? data.env0_template.this.is_azure_devops : null
-  token_id        = var.vcs == "gitlab" || var.vcs == "azure" ? data.env0_template.this.token_id : null
-  #token_name      = var.vcs == "gitlab" ? data.env0_template.this.token_name : null
-}
+#   # vcs
+#   # vcs configuration
+#   github_installation_id = var.vcs == "github" ? data.env0_template.this.github_installation_id : null
+#   bitbucket_client_key   = var.vcs == "bitbucket" ? data.env0_template.this.bitbucket_client_key : null
+#   # gitlab_project_id    = data.env0_template.this.gitlab_project_id
+#   is_azure_devops = var.vcs == "azure" ? data.env0_template.this.is_azure_devops : null
+#   token_id        = var.vcs == "gitlab" || var.vcs == "azure" ? data.env0_template.this.token_id : null
+#   #token_name      = var.vcs == "gitlab" ? data.env0_template.this.token_name : null
+# }
