@@ -24,7 +24,7 @@
 # }
 
 resource "env0_module" "aws" {
-  module_name         = "s3"
+  module_name         = "s3_test"
   module_provider     = "aws"
   repository          = data.env0_template.this.repository
   path                = "modules/s3"
