@@ -14,12 +14,12 @@ terraform {
   }
 }
 
-provider "env0" {
-  # env0 Provider expects to find the environment variables defined.
-  # to create an API key see:  https://docs.env0.com/docs/api-keys
-  # ENV0_API_KEY    
-  # ENV0_API_SECRET
-}
+# provider "env0" {
+#   # env0 Provider expects to find the environment variables defined.
+#   # to create an API key see:  https://docs.env0.com/docs/api-keys
+#   # ENV0_API_KEY    
+#   # ENV0_API_SECRET
+# }
 
 provider "aws" {
   region = var.region
