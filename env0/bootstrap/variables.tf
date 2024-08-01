@@ -4,16 +4,10 @@
 #   default     = true
 # }
 
-variable "create_projects" {
-  type        = bool
-  description = "create default projects"
-  default     = true
-}
-
-variable "default_team_name" {
-  type        = string
-  description = "Default Project Name"
-  default     = "Skunkworks"
+variable "default_projects" {
+  type        = list(string)
+  description = "if empty (do not create projects), otherwise, create list of default projects"
+  default     = ["Skunkworks", "Phoenix", "Unicorn"]
 }
 
 variable "create_templates" {
